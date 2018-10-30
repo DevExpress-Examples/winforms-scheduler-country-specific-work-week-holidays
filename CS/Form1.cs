@@ -46,7 +46,7 @@ namespace DisplayCustomHolidays {
             new Holiday(new DateTime(2015, 09, 25), "Eid al Adha holiday"),
             new Holiday(new DateTime(2015, 09, 26), "Eid al Adha holiday"),
             new Holiday(new DateTime(2015, 10, 15), "Hejira New Year (Islamic New Year)"),
-            new Holiday(new DateTime(2015, 12, 24), "The Prophet's Birthday"),
+            new Holiday(new DateTime(2015, 12, 24), "The Prophet's Birthday"),      
         };
 
         // This method adds holidays from the KuwaitHolidays2015 collection
@@ -72,7 +72,7 @@ namespace DisplayCustomHolidays {
                     Rectangle imgRect = header.ImageBounds;
                     imgRect.Width = header.ImageBounds.Height * img.Width / img.Height;
                     imgRect.X = header.ImageBounds.X + header.ImageBounds.Width - imgRect.Width;
-                    e.Graphics.DrawImage(img, imgRect);
+                    e.Cache.DrawImage(img, imgRect);
                     e.Handled = true;
                 }
             }
