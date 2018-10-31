@@ -14,7 +14,7 @@ Namespace DisplayCustomHolidays
             InitializeComponent()
         End Sub
 
-        Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
+        Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
             ' Specify a custom cell style provider to highlight cells that meet certain criteria.
             Me.dateNavigator1.CellStyleProvider = New CustomCellStyleProvider(Me.dateNavigator1)
             schedulerControl1.BeginUpdate()
@@ -71,7 +71,7 @@ Namespace DisplayCustomHolidays
                     Dim imgRect As Rectangle = header.ImageBounds
                     imgRect.Width = header.ImageBounds.Height * img.Width \ img.Height
                     imgRect.X = header.ImageBounds.X + header.ImageBounds.Width - imgRect.Width
-                    e.Graphics.DrawImage(img, imgRect)
+                    e.Cache.DrawImage(img, imgRect)
                     e.Handled = True
                 End If
             End If
@@ -101,7 +101,7 @@ Namespace DisplayCustomHolidays
             Me.dateNavigator = calendar
         End Sub
 
-        Public Sub UpdateAppearance(ByVal cell As CalendarCellStyle) Implements ICalendarCellStyleProvider.UpdateAppearance
+        Public Sub UpdateAppearance(ByVal cell As CalendarCellStyle)
             Dim workDays As WorkDaysCollection = Me.dateNavigator.SchedulerControl.WorkDays
             If workDays.IsHoliday(cell.Date) Then
                 Select Case cell.State

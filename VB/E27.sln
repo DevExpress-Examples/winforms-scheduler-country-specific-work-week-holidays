@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DisplayCustomHolidays", "DisplayCustomHolidays.vbproj", "{5730D8FF-BAFB-4C41-AD86-6D1A409A435D}"
 EndProject

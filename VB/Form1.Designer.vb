@@ -29,13 +29,13 @@
             Dim timeRuler1 As New DevExpress.XtraScheduler.TimeRuler()
             Dim timeRuler2 As New DevExpress.XtraScheduler.TimeRuler()
             Me.schedulerControl1 = New DevExpress.XtraScheduler.SchedulerControl()
-            Me.schedulerStorage1 = New DevExpress.XtraScheduler.SchedulerStorage(Me.components)
+            Me.schedulerDataStorage1 = New DevExpress.XtraScheduler.SchedulerDataStorage(Me.components)
             Me.dateNavigator1 = New DevExpress.XtraScheduler.DateNavigator()
             Me.defaultLookAndFeel1 = New DevExpress.LookAndFeel.DefaultLookAndFeel(Me.components)
-            DirectCast(Me.schedulerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-            DirectCast(Me.schedulerStorage1, System.ComponentModel.ISupportInitialize).BeginInit()
-            DirectCast(Me.dateNavigator1, System.ComponentModel.ISupportInitialize).BeginInit()
-            DirectCast(Me.dateNavigator1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.schedulerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.schedulerDataStorage1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.dateNavigator1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.dateNavigator1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             ' 
             ' schedulerControl1
@@ -47,7 +47,7 @@
             Me.schedulerControl1.OptionsView.ToolTipVisibility = DevExpress.XtraScheduler.ToolTipVisibility.Always
             Me.schedulerControl1.Size = New System.Drawing.Size(588, 415)
             Me.schedulerControl1.Start = New Date(2015, 2, 23, 0, 0, 0, 0)
-            Me.schedulerControl1.Storage = Me.schedulerStorage1
+            Me.schedulerControl1.DataStorage = Me.schedulerDataStorage1
             Me.schedulerControl1.TabIndex = 0
             Me.schedulerControl1.Text = "schedulerControl1"
             Me.schedulerControl1.Views.DayView.AllDayAreaScrollBarVisible = False
@@ -65,7 +65,6 @@
             Me.dateNavigator1.FirstDayOfWeek = System.DayOfWeek.Sunday
             Me.dateNavigator1.Location = New System.Drawing.Point(588, 0)
             Me.dateNavigator1.Name = "dateNavigator1"
-        Me.dateNavigator1.CellPadding = New System.Windows.Forms.Padding(2)
             Me.dateNavigator1.SchedulerControl = Me.schedulerControl1
             Me.dateNavigator1.Size = New System.Drawing.Size(230, 415)
             Me.dateNavigator1.TabIndex = 1
@@ -83,10 +82,10 @@
             Me.Controls.Add(Me.dateNavigator1)
             Me.Name = "Form1"
             Me.Text = "Display Custom Holidays"
-            DirectCast(Me.schedulerControl1, System.ComponentModel.ISupportInitialize).EndInit()
-            DirectCast(Me.schedulerStorage1, System.ComponentModel.ISupportInitialize).EndInit()
-            DirectCast(Me.dateNavigator1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
-            DirectCast(Me.dateNavigator1, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.schedulerControl1, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.schedulerDataStorage1, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.dateNavigator1.CalendarTimeProperties, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.dateNavigator1, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
 
         End Sub
@@ -94,7 +93,7 @@
         #End Region
 
         Private WithEvents schedulerControl1 As DevExpress.XtraScheduler.SchedulerControl
-        Private schedulerStorage1 As DevExpress.XtraScheduler.SchedulerStorage
+        Private schedulerDataStorage1 As DevExpress.XtraScheduler.SchedulerDataStorage
         Private dateNavigator1 As DevExpress.XtraScheduler.DateNavigator
         Private defaultLookAndFeel1 As DevExpress.LookAndFeel.DefaultLookAndFeel
     End Class
