@@ -72,7 +72,7 @@ namespace DisplayCustomHolidays {
                     Rectangle imgRect = header.ImageBounds;
                     imgRect.Width = header.ImageBounds.Height * img.Width / img.Height;
                     imgRect.X = header.ImageBounds.X + header.ImageBounds.Width - imgRect.Width;
-                    e.Graphics.DrawImage(img, imgRect);
+                    e.Cache.DrawImage(img, imgRect);
                     e.Handled = true;
                 }
             }
