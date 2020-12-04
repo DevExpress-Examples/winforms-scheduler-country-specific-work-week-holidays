@@ -124,6 +124,10 @@ Namespace DisplayCustomHolidays
                 cell.Image = Image.FromFile("appointment_icon.png")
             End If
         End Sub
+
+        Private Sub ICalendarCellStyleProvider_UpdateAppearance(cell As CalendarCellStyle) Implements ICalendarCellStyleProvider.UpdateAppearance
+
+        End Sub
     End Class
     #End Region ' #CustomCellStyleProvider
 End Namespace
