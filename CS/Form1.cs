@@ -8,14 +8,11 @@ using System.Drawing;
 
 namespace DisplayCustomHolidays {
     public partial class Form1 : DevExpress.XtraEditors.XtraForm {
-
         public Form1() {
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e) {
             // Specify a custom cell style provider to highlight cells that meet certain criteria.
-            this.dateNavigator1.CellStyleProvider = new CustomCellStyleProvider(this.dateNavigator1);
             schedulerControl1.BeginUpdate();
             schedulerControl1.OptionsView.FirstDayOfWeek = FirstDayOfWeek.Sunday;
             schedulerControl1.WorkDays.Clear();
@@ -24,13 +21,21 @@ namespace DisplayCustomHolidays {
                   | DevExpress.XtraScheduler.WeekDays.Tuesday | DevExpress.XtraScheduler.WeekDays.Wednesday
                   | DevExpress.XtraScheduler.WeekDays.Thursday);
             GenerateHolidaysFor2015();
+
             schedulerControl1.EndUpdate();
-            this.schedulerControl1.ActiveViewType = SchedulerViewType.Day;
-            this.dateNavigator1.HighlightHolidays = true;
-            this.dateNavigator1.DateTime = new DateTime(2015, 02, 26);
+            schedulerControl1.ActiveViewType = SchedulerViewType.Day;
 
+            dateNavigator1.CellStyleProvider = new CustomCellStyleProvider(schedulerControl1.WorkDays);
+            dateNavigator1.HighlightHolidays = true;
+            dateNavigator1.DateTime = new DateTime(2015, 02, 26);
+
+            for (int day = 9; day < 14; day++) {
+                DateTime startDate = new DateTime(2015, 02, day, 12, 0, 0);
+                DateTime endDate = startDate.AddHours(2);
+                var appointment = schedulerDataStorage1.Appointments.CreateAppointment(AppointmentType.Normal, startDate, endDate, startDate.ToLongDateString());
+                schedulerDataStorage1.Appointments.Add(appointment);
+            }
         }
-
         // A collection of Kuwait Holidays for 2015.
         private Holiday[] KuwaitHolidays2015 = {
             new Holiday(new DateTime(2015, 01, 1), "New Year's Day"),
@@ -46,9 +51,8 @@ namespace DisplayCustomHolidays {
             new Holiday(new DateTime(2015, 09, 25), "Eid al Adha holiday"),
             new Holiday(new DateTime(2015, 09, 26), "Eid al Adha holiday"),
             new Holiday(new DateTime(2015, 10, 15), "Hejira New Year (Islamic New Year)"),
-            new Holiday(new DateTime(2015, 12, 24), "The Prophet's Birthday"),      
+            new Holiday(new DateTime(2015, 12, 24), "The Prophet's Birthday"),
         };
-
         // This method adds holidays from the KuwaitHolidays2015 collection
         // to the WorkDays collection of the Scheduler Control.
         private void GenerateHolidaysFor2015() {
@@ -56,16 +60,15 @@ namespace DisplayCustomHolidays {
                 this.schedulerControl1.WorkDays.Add(item);
             }
         }
-
         private void schedulerControl1_CustomDrawDayHeader(object sender, CustomDrawObjectEventArgs e) {
             #region #CustomDrawDayHeader
             // Check whether the current object is a Day Header.
             SchedulerHeader header = e.ObjectInfo as SchedulerHeader;
             if (header != null) {
                 // Check whether the current date is a known holiday.
-                Holiday hol = FindHoliday(header.Interval.Start.Date);
-                if (hol != null) {
-                    header.Caption = hol.DisplayName;
+                Holiday holiday = FindHoliday(header.Interval.Start.Date);
+                if (holiday != null) {
+                    header.Caption = holiday.DisplayName;
                     e.DrawDefault();
                     // Add the holiday name to the day header's caption.
                     Image img = Image.FromFile("Kuwait.png");
@@ -78,14 +81,13 @@ namespace DisplayCustomHolidays {
             }
             #endregion #CustomDrawDayHeader
         }
-
         Holiday FindHoliday(DateTime date) {
             WorkDaysCollection workDays = this.schedulerControl1.WorkDays;
             foreach (WorkDay item in workDays) {
                 if (item is Holiday) {
-                    Holiday hol = (Holiday)item;
-                    if (hol.Date == date)
-                        return hol;
+                    Holiday holiday = (Holiday)item;
+                    if (holiday.Date == date)
+                        return holiday;
                 }
             }
             return null;
@@ -93,14 +95,13 @@ namespace DisplayCustomHolidays {
     }
     #region #CustomCellStyleProvider
     public class CustomCellStyleProvider : ICalendarCellStyleProvider {
-        DateNavigator dateNavigator;
-
-        public CustomCellStyleProvider(DateNavigator calendar) {
-            this.dateNavigator = calendar;
+        WorkDaysCollection workDays;
+        public CustomCellStyleProvider(WorkDaysCollection workDays) {
+            this.workDays = workDays;
         }
-
         public void UpdateAppearance(CalendarCellStyle cell) {
-            WorkDaysCollection workDays = this.dateNavigator.SchedulerControl.WorkDays;
+            if (workDays == null)
+                return;
             if (workDays.IsHoliday(cell.Date)) {
                 switch (cell.State) {
                     // Highlight dates hovered over with the mouse.
@@ -119,9 +120,9 @@ namespace DisplayCustomHolidays {
                         break;
                 }
             }
-            // Display an image for the dates which contains appointments.
+            // Display images for dates that contain appointments.
             if (cell.IsSpecial) {
-                cell.Appearance.Font = new Font(cell.Appearance.Font, FontStyle.Regular);
+                cell.Appearance.FontStyleDelta = FontStyle.Regular;
                 cell.Image = Image.FromFile("appointment_icon.png");
             }
         }
