@@ -3,7 +3,7 @@
 [![](https://img.shields.io/badge/Open_in_DevExpress_Support_Center-FF7200?style=flat-square&logo=DevExpress&logoColor=white)](https://supportcenter.devexpress.com/ticket/details/E27)
 [![](https://img.shields.io/badge/📖_How_to_use_DevExpress_Examples-e9f6fc?style=flat-square)](https://docs.devexpress.com/GeneralInformation/403183)
 <!-- default badges end -->
-# WinForms Scheduler - Customize work week and display country-specific holidays
+# WinForms Scheduler - Customize the work week and display country-specific holidays
 
 This example demonstrates how to add country-specific holidays (Kuwait), customize the work week (from Sunday to Thursday), and change appearance settings of cells within the [Date Navigator](https://docs.devexpress.com/WindowsForms/1740/controls-and-libraries/scheduler/visual-elements/date-navigator).
 
