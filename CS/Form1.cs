@@ -122,7 +122,7 @@ namespace DisplayCustomHolidays {
             }
             // Display images for dates that contain appointments.
             if (cell.IsSpecial) {
-                cell.Appearance.FontStyleDelta = FontStyle.Regular;
+                cell.Appearance.FontStyleDelta = System.Drawing.FontStyle.Regular;
                 cell.Image = Image.FromFile("appointment_icon.png");
             }
         }
