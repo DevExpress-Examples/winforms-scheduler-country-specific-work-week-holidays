@@ -111,7 +111,7 @@ Namespace DisplayCustomHolidays
 
             ' Display images for dates that contain appointments.
             If cell.IsSpecial Then
-                cell.Appearance.FontStyleDelta = FontStyle.Regular
+                cell.Appearance.FontStyleDelta = System.Drawing.FontStyle.Regular
                 cell.Image = Image.FromFile("appointment_icon.png")
             End If
         End Sub
