@@ -8,7 +8,7 @@
 
 This example demonstrates how to add country-specific holidays (Kuwait), customize the work week (from Sunday to Thursday), and change appearance settings of cells within the [Date Navigator](https://docs.devexpress.com/WindowsForms/1740/controls-and-libraries/scheduler/visual-elements/date-navigator).
 
-![](https://raw.githubusercontent.com/DevExpress-Examples/how-to-display-a-custom-work-week-and-holidays-e27/15.2.4+/media/5f1d0e44-95d3-11e5-80bf-00155d62480c.png)
+![WinForms Scheduler - Customize the work week and display country-specific holidays](media/5f1d0e44-95d3-11e5-80bf-00155d62480c.png)
 
 Use the [SchedulerControl.WorkDays](https://docs.devexpress.com/WindowsForms/DevExpress.XtraScheduler.SchedulerControl.WorkDays) property to add weekdays and holidays:
 
@@ -40,3 +40,4 @@ Use the `DateNavigator.CellStyleProvider` property to specify a custom cell styl
 
 (you will be redirected to DevExpress.com to submit your response)
 <!-- feedback end -->
+
